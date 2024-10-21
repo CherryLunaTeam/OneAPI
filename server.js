@@ -13,7 +13,9 @@ let servers = [];
 app.post('/servers', (req, res) => {
     console.log('Requête reçue pour enregistrer un serveur:', req.body);
     const { name, ip, port } = req.body;
+    console.log(`Nom: ${name}, IP: ${ip}, Port: ${port}`);
     if (!name || !ip || !port) {
+        console.log('Données manquantes:', { name, ip, port });
         return res.status(400).json({ error: 'Nom, IP et port sont requis' });
     }
     const newServer = { id: Date.now().toString(), name, ip, port };
