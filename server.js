@@ -1,14 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 let servers = [];
 
 // Enregistrer un nouveau serveur
 app.post('/servers', (req, res) => {
+    console.log('Requête reçue pour enregistrer un serveur:', req.body);
     const { name, ip, port } = req.body;
     if (!name || !ip || !port) {
         return res.status(400).json({ error: 'Nom, IP et port sont requis' });
